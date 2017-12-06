@@ -66,7 +66,8 @@ default['kapacitor']['systemd']                   = "true"
 default['kapacitor']['home']                      = node['hopsmonitor']['dir'] + "/kapacitor-" + "#{node['kapacitor']['version']}"
 default['kapacitor']['base_dir']                  = node['hopsmonitor']['dir'] + "/kapacitor"
 default['kapacitor']['pid_file']                  = "/tmp/kapacitor.pid"
-default['kapacitor']['notify']['email']              = ""
+default['kapacitor']['email_enabled']             = "true"
+default['kapacitor']['notify']['email']           = "hopsworks@gmail.com"
 default['kapacitor']['slack_enabled']             = "false"
 default['kapacitor']['slack']                     = node['kapacitor']['slack_enabled'] == "true" ? true : false
 default['kapacitor']['slack_url']                 = ""
@@ -76,3 +77,8 @@ default['hopsmonitor']['default']['private_ips']             = ['10.0.2.15']
 default['hopsmonitor']['default']['public_ips']              = ['10.0.2.15']
 default['hopsmonitor']['public_ips']              = ['10.0.2.15']
 default['hopsmonitor']['private_ips']             = ['10.0.2.15']
+
+default['smtp']['host']                           = "smtp.gmail.com"
+default['smtp']['ssl_port']                       = 587
+default['smtp']['email']                          = "hopsworks@gmail.com"
+default['smtp']['email_password']                 = "hopsworkskthfs"

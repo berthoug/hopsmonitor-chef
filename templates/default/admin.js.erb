@@ -64,7 +64,7 @@ var memory = {
     title:"Yarn cluster memory usage (MB)",
     type: "graphite",
     datasource: 'influxdb',
-    span: 6,
+    span: 4,
     steppedLine: true,
     "yaxes": [
 	{
@@ -101,7 +101,7 @@ var cores = {
     title:"Yarn cluster vcores usage",
     type: "graphite",
     datasource: 'influxdb',
-    span: 6,
+    span: 4,
     steppedLine: true,
     "yaxes": [
 	{
@@ -126,6 +126,43 @@ var cores = {
 	{
 	    select:[[
 		{'type':'field','params':['AllocatedVCores']},
+		{'type': 'median', 'params': []},
+	    ]],
+	    groupBy: [{type: 'time', params: ['$interval']},{type: 'fill', params: ['none']}],
+	    measurement: 'resourcemanager',
+	    alias: "allocated"
+	}]
+};
+
+var gpus = {
+    title:"Yarn cluster gpus usage",
+    type: "graphite",
+    datasource: 'influxdb',
+    span: 4,
+    steppedLine: true,
+    "yaxes": [
+	{
+	    "format": "short",
+	    "label": null,
+	    "logBase": 1,
+	    "max": null,
+	    "min": 0,
+	    "show": true
+	},{}
+    ],
+    targets:[
+	{
+	    select:[[
+		{'type':'field','params':['AvailableGPUs']},
+		{'type': 'median', 'params': []},
+	    ]],
+	    groupBy: [{type: 'time', params: ['$interval']},{type: 'fill', params: ['none']}],
+	    measurement: 'resourcemanager',
+	    alias: "available"
+	},
+	{
+	    select:[[
+		{'type':'field','params':['AllocatedGPUs']},
 		{'type': 'median', 'params': []},
 	    ]],
 	    groupBy: [{type: 'time', params: ['$interval']},{type: 'fill', params: ['none']}],
@@ -224,6 +261,7 @@ var yarn_row = {
     panels:[
 	memory,
 	cores,
+	gpus,
 	nodemanagers,
 	containers,
 	apps

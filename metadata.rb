@@ -132,6 +132,9 @@ attribute "grafana/port",
 #
 # Kapacitor
 #
+attribute "kapacitor/email_enabled",
+          :description => "Send notifications by email",
+          :type => "string"
 
 attribute "kapacitor/notify/email",
           :description => "Send notification emails to this address",
@@ -148,16 +151,6 @@ attribute "kapacitor/slack_url",
 attribute "kapacitor/slack_channel",
           :description => "Slack channel name",
           :type => "string"
-
-
-attribute "smtp/email",
-          :description => "Smtp email",
-          :type => "string"
-
-attribute "smtp/email_password",
-          :description => "Hopsworks email",
-          :type => "string"
-
 
 #
 # Telegraf
